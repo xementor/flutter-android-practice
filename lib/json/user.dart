@@ -18,9 +18,3 @@ class User {
 
 String jsonString = '{"name": "ih", "email": "ih.zonaid@gmail.com"}';
 Map<String, dynamic> userMap = jsonDecode(jsonString);
-var user = User.fromJson(userMap);
-
-void call() {
-  print('Howdy, ${user.name}!');
-  print('We sent the verification link to ${user.email}.');
-}
