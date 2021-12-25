@@ -6,6 +6,8 @@ import 'package:practice/flexible.dart';
 import 'package:practice/main.dart';
 import 'package:practice/simple_list.dart';
 
+import 'json/json_ui.dart';
+import 'json/user.dart';
 import 'traversy_app.dart';
 
 class FrontPage extends StatefulWidget {
@@ -163,6 +165,13 @@ class _FrontPageState extends State<FrontPage> {
                     MaterialPageRoute(
                         builder: (context) =>
                             SimpleList(storage: DataStorage())))
+              },
+            ),
+            ListTile(
+              title: const Text("Json data"),
+              onTap: () => {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Json()))
               },
             ),
           ],

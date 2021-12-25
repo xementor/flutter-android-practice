@@ -88,7 +88,6 @@ class _SimpleListState extends State<SimpleList> {
               child: ElevatedButton(
                 onPressed: () {
                   _add();
-                  
                 },
                 child: const Icon(Icons.add),
               ),

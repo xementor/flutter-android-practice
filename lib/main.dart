@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:practice/data_storage_ex.dart';
 import 'package:practice/list_view.dart';
 
+import 'json/json.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,8 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_constructors
     return MaterialApp(
-      title: 'Medicine Store',
+      title: "Medicine Store",
       home: const FrontPage(),
     );
   }
