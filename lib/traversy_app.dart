@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/services.dart';
 
 class TraversyApp extends StatefulWidget {
   const TraversyApp({Key? key}) : super(key: key);
@@ -11,6 +14,15 @@ class TraversyApp extends StatefulWidget {
 class _TraversyAppState extends State<TraversyApp> {
   final _randomWordPair = <WordPair>[];
   final savedWordPair = Set<WordPair>();
+  final newJsonDataList = <String>[];
+
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/db.json');
+    final data = await json.decode(response);
+    setState(() {
+      newJsonDataList.add(data['name']);
+    });
+  }
 
   // Custom Widget
   Widget _buildList() {
@@ -64,7 +76,8 @@ class _TraversyAppState extends State<TraversyApp> {
         body: ListView(children: divided),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            readJson();
+            print(newJsonDataList[0]);
           },
         ),
       );

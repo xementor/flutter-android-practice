@@ -11,13 +11,11 @@ Future<String> readFromJsonToVar(String x) async {
 }
 
 class Json extends StatelessWidget {
-  String data;
+  String data = "jd";
   late Map<String, dynamic> joson;
 
   Json({Key? key}) : super(key: key) {
-    () async {
-      this.data = await readFromJsonToVar(data);
-    };
+    data = "jl";
     joson = jsonDecode(data);
   }
 
