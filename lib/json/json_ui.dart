@@ -2,28 +2,52 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:practice/json/json.dart';
 import 'package:practice/json/user.dart';
 
-Future<String> readFromJsonToVar(String x) async {
+Future<String> readFromJsonToVar() async {
   final String response = await rootBundle.loadString('assets/db.json');
   return response;
 }
 
-class Json extends StatelessWidget {
-  String data = "jd";
-  late Map<String, dynamic> joson;
+class Json extends StatefulWidget {
+  // String data = "jd";
+  // late Map<String, dynamic> joson;
+  Json({Key? key}) : super(key: key);
 
-  Json({Key? key}) : super(key: key) {
-    data = "jl";
-    joson = jsonDecode(data);
-  }
+  // Json({Key? key}) : super(key: key) {
+  //   data = "jl";
+  //   joson = jsonDecode(data);
+  // }
 
   @override
+  State<Json> createState() => _JsonState();
+}
+
+class _JsonState extends State<Json> {
+  String jsonString = '{"name": "abc", "email": "ej"}';
+  @override
   Widget build(BuildContext context) {
-    var user = User.fromJson(userMap);
-    return Container(
-      child: Text(joson['name']),
+    a() {
+      () async {
+        String jsonString = await readFromJsonToVar();
+        Map<String, dynamic> userMap = jsonDecode(jsonString);
+        User user = User.fromJson(userMap);
+        setState(() {
+          user = user;
+        });
+      };
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Json"),
+      ),
+      body: Column(
+        children: [
+          Text('hi'),
+          Text(name),
+        ],
+      ),
     );
   }
 }

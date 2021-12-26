@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
+
 class User {
   final String name;
   final String email;
@@ -16,5 +18,12 @@ class User {
       };
 }
 
-String jsonString = '{"name": "ih", "email": "ih.zonaid@gmail.com"}';
-Map<String, dynamic> userMap = jsonDecode(jsonString);
+Future<String> readFromJsonToVar() async {
+  final String response = await rootBundle.loadString('assets/db.json');
+  return response;
+}
+
+// String jsonString = '{"name": "ih", "email": "ih.zonaid@gmail.com"}';
+
+// String jsonString =  readFromJsonToVar();
+// Map<String, dynamic> userMap = jsonDecode( readFromJsonToVar());

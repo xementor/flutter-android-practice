@@ -1,8 +1,9 @@
 {
-    "name": "ih.zonaid",
+    "name": "zonaid",
     "age": 22,
     "address": {
         "home": "Shakua",
         "zilla": "kishoregon"
-    }
+    },
+    "email": "ih.zonaid@gmail.com"
 }
