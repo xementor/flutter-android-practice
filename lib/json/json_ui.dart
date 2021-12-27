@@ -25,6 +25,7 @@ class Json extends StatefulWidget {
 
 class _JsonState extends State<Json> {
   String jsonString = '{"name": "abc", "email": "ej"}';
+  var abc = readFromJsonToVar();
   @override
   Widget build(BuildContext context) {
     a() {
@@ -38,6 +39,8 @@ class _JsonState extends State<Json> {
       };
     }
 
+    var q = User('ih', 'hellow');
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Json"),
@@ -45,7 +48,7 @@ class _JsonState extends State<Json> {
       body: Column(
         children: [
           Text('hi'),
-          Text(name),
+          Text("hiellja"),
         ],
       ),
     );

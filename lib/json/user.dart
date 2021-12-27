@@ -8,6 +8,11 @@ class User {
 
   User(this.name, this.email);
 
+  Future<String> get ajsonString async {
+    String response = await rootBundle.loadString('assets/db.json');
+    return response;
+  }
+
   User.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         email = json['email'];

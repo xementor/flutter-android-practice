@@ -129,8 +129,8 @@ class _FrontPageState extends State<FrontPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MyHomePage(
-                              title: "Counter",
-                              storage: DataStorage(),
+                            // title: "Counter",
+                            // storage: DataStorage(),
                             )))
               },
             ),

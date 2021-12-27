@@ -8,7 +8,9 @@ x Implement Search // All same. Column layout problem solved by flexible. Have t
 x Take data from file.txt // !Should use firebase // !waste of time // I've Implemented read write functinality.
     Have to improve
 
-! read local json. here i am facing problem
+! read local json. here i am facing problem.
+    Another realization is json only for reading.
+
     Solution: Just do this another way, later you will understand the logic,
     * Now i have understand importance of design pattern of code. or clean code. what to extract what is not.
     * static type programing is very cool. understand how fool i was thinking no static langueage is life.
@@ -16,7 +18,9 @@ x Take data from file.txt // !Should use firebase // !waste of time // I've Impl
     mutable and immutable var is very imporatnt to think about.
     
 
-- Start Firshipio
+- Focus on Database desing, sqlite
+! Start Firshipio 
+    Fucking old dated video, just don't work now.
 ! State management Provider Block // yt flutter
 ! Complex UI - Stack Position animation
 ! Redux Mosh
@@ -25,7 +29,10 @@ x Take data from file.txt // !Should use firebase // !waste of time // I've Impl
 # Problem arising while coding.
 - Net problem: Just connect a phone in hostpot, it is enough for google search , don't think about charge do this charge, don't think this as you phone's draining. You have to do this.
 
-
+- Just Lean Seperate technology seperately deeply.
+- Most of time, time just wasted with seperate technology
+- Just focus on problem.
+- Try to solve this problem, if this is seperate problem , then also jump there.
 
 
 
