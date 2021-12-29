@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          title: Text('TutorialKart - Flutter SQLite Tutorial'),
+          title: Text('Learning Sqlite db'),
         ),
         body: TabBarView(
           children: [
@@ -265,12 +265,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _insert(name, miles) async {
+    print(name);
+    int idx = 33;
     // row to insert
     Map<String, dynamic> row = {
       DatabaseHelper.columnName: name,
       DatabaseHelper.columnMiles: miles
     };
-    Car car = Car.fromMap(row);
+    Car car = Car(id: idx, name: name, miles: miles);
+    print(car.name);
     final id = await dbHelper.insert(car);
     _showMessageInScaffold('inserted row id: $id');
   }
@@ -291,7 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _update(id, name, miles) async {
     // row to update
-    Car car = Car(id, name, miles);
+    Car car = Car(id: id, name: name, miles: miles);
     final rowsAffected = await dbHelper.update(car);
     _showMessageInScaffold('updated $rowsAffected row(s)');
   }

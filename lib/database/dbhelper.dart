@@ -1,47 +1,59 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/widgets.dart';
 import 'car.dart';
 import 'package:path/path.dart';
+import 'dart:async';
 
 class DatabaseHelper {
-  static final _databaseName = "cardb.db";
-  static final _databaseVersion = 1;
+  static const _databaseName = "cardb.db";
+  static const _databaseVersion = 1;
 
-  static final table = 'cars_table';
+  static const table = 'cars_table';
 
-  static final columnId = 'id';
-  static final columnName = 'name';
-  static final columnMiles = 'miles';
+  static const columnId = 'id';
+  static const columnName = 'name';
+  static const columnMiles = 'miles';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // only have a single app-wide reference to the database
-  static late Database _database;
-  Future<Database> get database async {
-    if (_database != null) return _database;
-    // lazily instantiate the db the first time it is accessed
-    _database = await _initDatabase();
-    return _database;
+  Future<Database> _initDatabase() async {
+    final database = openDatabase(
+      join(await getDatabasesPath(), 'abc.db'),
+      onCreate: (db, version) {
+        return db.execute(
+          'CREATE TABLE cars_table(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,miles INTEGER NO NULL)',
+        );
+      },
+      version: 1,
+    );
+    return database;
   }
 
   // this opens the database (and creates it if it doesn't exist)
-  _initDatabase() async {
-    String path = join(await getDatabasesPath(), _databaseName);
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
+  // _initDatabase() async {
+  //   String path = join(await getDatabasesPath(), _databaseName);
+  //   return await openDatabase(path,
+  //       version: _databaseVersion, onCreate: _onCreate);
+  // }
+  Future<Database> get database async {
+    // lazily instantiate the db the first time it is accessed
+    Future<Database> _database = _initDatabase();
+    return _database;
   }
 
-  // SQL code to create the database table
-  Future _onCreate(Database db, int version) async {
-    await db.execute('''
-          CREATE TABLE $table (
-            $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $columnName TEXT NOT NULL,
-            $columnMiles INTEGER NOT NULL
-          )
-          ''');
-  }
+  // // SQL code to create the database table
+  // Future _onCreate(Database db, int version) async {
+  //   await db.execute('''
+  //         CREATE TABLE $table (
+  //           $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+  //           $columnName TEXT NOT NULL,
+  //           $columnMiles INTEGER NOT NULL
+  //         )
+  //         ''');
+  // }
 
   // Helper methods
 
@@ -50,7 +62,10 @@ class DatabaseHelper {
   // inserted row.
   Future<int> insert(Car car) async {
     Database db = await instance.database;
-    return await db.insert(table, {'name': car.name, 'miles': car.miles});
+    return await db.insert('cars_table', car.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+
+    // await db.insert(table, {'name': car.name, 'miles': car.miles});
   }
 
   // All of the rows are returned as a list of maps, where each map is
@@ -70,8 +85,8 @@ class DatabaseHelper {
   // raw SQL commands. This method uses a raw query to give the row count.
   Future<int?> queryRowCount() async {
     Database db = await instance.database;
-    var result = await Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $table'));
+    var result =
+        Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
     return result;
   }
 
@@ -79,7 +94,7 @@ class DatabaseHelper {
   // column values will be used to update the row.
   Future<int> update(Car car) async {
     Database db = await instance.database;
-    int id = car.toMap()['id'];
+    int id = car.id;
     return await db
         .update(table, car.toMap(), where: '$columnId = ?', whereArgs: [id]);
   }
