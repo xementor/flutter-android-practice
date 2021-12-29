@@ -1,14 +1,12 @@
-import 'dbhelper.dart';
-
 class Medicine {
-  final int id;
+  int? id;
   final String name;
   final String location;
-  final int price;
+  final double price;
   final int storage;
 
   Medicine({
-    required this.id,
+    this.id,
     required this.name,
     required this.price,
     required this.storage,
@@ -24,7 +22,6 @@ class Medicine {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'location': location,
       'price': price,
@@ -34,6 +31,6 @@ class Medicine {
 
   @override
   String toString() {
-    return 'Medicine{id: $id, name: $name, location: $location, price: $price, storage: $storage';
+    return 'Medicine{id: , name: $name, location: $location, price: $price, storage: $storage';
   }
 }

@@ -25,8 +25,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final dbHelper = DatabaseHelper.instance;
 
-  List<Medicine> cars = [];
-  List<Medicine> carsByName = [];
+  List<Medicine> medicines = [];
+  List<Medicine> medicineByName = [];
 
   //controllers used in insert operation UI
   TextEditingController nameController = TextEditingController();
@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       String name = nameController.text;
                       String location = locationController.text;
-                      int price = int.parse(priceController.text);
+                      double price = double.parse(priceController.text);
                       int storage = int.parse(storageController.text);
                       _insert(name, location, price, storage);
                     },
@@ -144,9 +144,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: cars.length + 1,
+                itemCount: medicines.length + 1,
                 itemBuilder: (BuildContext context, int index) {
-                  if (index == cars.length) {
+                  if (index == medicines.length) {
                     return RaisedButton(
                       child: Text('Refresh'),
                       onPressed: () {
@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 40,
                     child: Center(
                       child: Text(
-                        '[${cars[index].id}] ${cars[index].name} - ${cars[index].storage} miles',
+                        '[${medicines[index].id}] ${medicines[index].name} - ${medicines[index].storage} miles',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
@@ -180,13 +180,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         labelText: 'Medicine Name',
                       ),
                       onChanged: (text) {
-                        if (text.length >= 2) {
+                        if (text.length >= 1) {
                           setState(() {
                             _query(text);
                           });
                         } else {
                           setState(() {
-                            carsByName.clear();
+                            medicineByName.clear();
                           });
                         }
                       },
@@ -197,14 +197,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 300,
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
-                      itemCount: carsByName.length,
+                      itemCount: medicineByName.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           height: 50,
                           margin: EdgeInsets.all(2),
                           child: Center(
                             child: Text(
-                              '[${carsByName[index].id}] ${carsByName[index].name} - ${carsByName[index].storage} ',
+                              /*[${medicineByName[index].id}]*/ ' ${medicineByName[index].name} - ${medicineByName[index].storage} ',
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
@@ -274,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       int id = int.parse(idUpdateController.text);
                       String name = nameUpdateController.text;
                       String location = locationUpdateController.text;
-                      int price = int.parse(priceUpdateController.text);
+                      double price = double.parse(priceUpdateController.text);
                       int storage = int.parse(storageUpdateController.text);
                       _update(id, name, location, price, storage);
                     },
@@ -335,23 +335,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _queryAll() async {
     final allRows = await dbHelper.queryAllRows();
-    cars.clear();
-    allRows.forEach((row) => cars.add(Medicine.fromMap(row)));
+    medicines.clear();
+    allRows.forEach((row) => medicines.add(Medicine.fromMap(row)));
     _showMessageInScaffold('Query done.');
     setState(() {});
   }
 
   void _query(name) async {
     final allRows = await dbHelper.queryRows(name);
-    carsByName.clear();
-    allRows.forEach((row) => carsByName.add(Medicine.fromMap(row)));
+    medicineByName.clear();
+    allRows.forEach((row) => medicineByName.add(Medicine.fromMap(row)));
   }
 
   void _update(id, name, location, price, storage) async {
     // row to update
-    Medicine car = Medicine(
+    Medicine med = Medicine(
         id: id, name: name, location: location, price: price, storage: storage);
-    final rowsAffected = await dbHelper.update(car);
+    final rowsAffected = await dbHelper.update(med);
     _showMessageInScaffold('updated $rowsAffected row(s)');
   }
 
