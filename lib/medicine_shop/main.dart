@@ -57,6 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _editWindow() {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (BuildContext context) {
+        return Text('o');
+      }));
+    }
+
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -143,8 +150,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Column(
               children: [
-                Container(
-                  padding: EdgeInsets.all(20),
+                Flexible(
+                  flex: 1,
                   child: TextField(
                     controller: queryController,
                     decoration: InputDecoration(
@@ -158,14 +165,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         });
                       } else {
                         setState(() {
-                          medicineByName.clear();
+                          medicines.clear();
                         });
                       }
                     },
                   ),
-                  height: 100,
                 ),
-                Container(
+                Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(8),
                     itemCount: medicines.length + 1,
@@ -188,7 +194,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         subtitle: Text((medicines[index].price).toString()),
                         trailing: Text(medicines[index].storage.toString()),
                         onTap: () {
-                          print('tapped');
+                          print('push another window calling');
+                          _editWindow();
                         },
                       );
                     },
@@ -214,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         } else {
                           setState(() {
-                            medicineByName.clear();
+                            medicines.clear();
                           });
                         }
                       },
@@ -371,8 +378,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _query(name) async {
     final allRows = await dbHelper.queryRows(name);
-    medicineByName.clear();
-    allRows.forEach((row) => medicineByName.add(Medicine.fromMap(row)));
+    // medicineByName.clear();
+    // allRows.forEach((row) => medicineByName.add(Medicine.fromMap(row)));
+    medicines.clear();
+    allRows.forEach((row) => medicines.add(Medicine.fromMap(row)));
   }
 
   void _update(id, name, location, price, storage) async {

@@ -1,6 +1,7 @@
 # LeetCode 1hour every Day
 
 
+
 x Add Swap to delete from selected list
 x Implement Search // All same. Column layout problem solved by flexible. Have to build problem solving skill
     Build problem solving skill.
