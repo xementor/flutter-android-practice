@@ -141,32 +141,60 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Container(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: medicines.length + 1,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == medicines.length) {
-                    return RaisedButton(
-                      child: Text('Refresh'),
-                      onPressed: () {
-                        setState(() {
-                          _queryAll();
-                        });
-                      },
-                    );
-                  }
-                  return Container(
-                    height: 40,
-                    child: Center(
-                      child: Text(
-                        '[${medicines[index].id}] ${medicines[index].name} - ${medicines[index].storage} miles',
-                        style: TextStyle(fontSize: 18),
-                      ),
+            Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: queryController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Medicine Name',
                     ),
-                  );
-                },
-              ),
+                    onChanged: (text) {
+                      if (text.length >= 1) {
+                        setState(() {
+                          _query(text);
+                        });
+                      } else {
+                        setState(() {
+                          medicineByName.clear();
+                        });
+                      }
+                    },
+                  ),
+                  height: 100,
+                ),
+                Container(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: medicines.length + 1,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == medicines.length) {
+                        return ElevatedButton(
+                          child: Text('Refresh'),
+                          onPressed: () {
+                            setState(() {
+                              _queryAll();
+                            });
+                          },
+                        );
+                      }
+                      return ListTile(
+                        title: Text(
+                          medicines[index].name,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        subtitle: Text((medicines[index].price).toString()),
+                        trailing: Text(medicines[index].storage.toString()),
+                        onTap: () {
+                          print('tapped');
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
             Center(
               child: Column(
@@ -202,9 +230,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         return Container(
                           height: 50,
                           margin: EdgeInsets.all(2),
-                          child: Center(
-                            child: Text(
-                              /*[${medicineByName[index].id}]*/ ' ${medicineByName[index].name} - ${medicineByName[index].storage} ',
+                          child: ListTile(
+                            title: Text(
+                              /*[${medicineByName[index].id}]*/ ' ${medicineByName[index].name} ',
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
