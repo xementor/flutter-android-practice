@@ -57,10 +57,102 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _editWindow() {
+    _editWindow(Medicine med) {
+      idUpdateController.text = med.id.toString();
+      nameUpdateController.text = med.name;
+      locationUpdateController.text = med.location;
+      priceUpdateController.text = med.price.toString();
+      storageUpdateController.text = med.storage.toString();
+
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
-        return Text('o');
+        return Scaffold(
+            appBar: AppBar(
+              title: Text('Manage'),
+            ),
+            body: Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: idUpdateController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: const Text('Medicine id'),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: nameUpdateController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Medicine Name',
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: locationUpdateController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'location',
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: priceUpdateController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'price',
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: TextField(
+                    controller: storageUpdateController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Storage',
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  child: Text('Update Medicine Details'),
+                  onPressed: () {
+                    int id = int.parse(idUpdateController.text);
+                    String name = nameUpdateController.text;
+                    String location = locationUpdateController.text;
+                    double price = double.parse(priceUpdateController.text);
+                    int storage = int.parse(storageUpdateController.text);
+                    _update(id, name, location, price, storage);
+                  },
+                ),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: const Text('Update'),
+              onPressed: () {
+                // updating from db
+                int id = int.parse(idUpdateController.text);
+                String name = nameUpdateController.text;
+                String location = locationUpdateController.text;
+                double price = double.parse(priceUpdateController.text);
+                int storage = int.parse(storageUpdateController.text);
+                _update(id, name, location, price, storage);
+
+                // going back
+                Navigator.of(context).pop();
+
+                // set state
+                _refresh();
+              },
+            ));
       }));
     }
 
@@ -138,11 +230,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   RaisedButton(
                     child: Text('Insert Medicine Details'),
                     onPressed: () {
+                      // insert in db;
                       String name = nameController.text;
                       String location = locationController.text;
                       double price = double.parse(priceController.text);
                       int storage = int.parse(storageController.text);
                       _insert(name, location, price, storage);
+
+                      // refresh
+                      _refresh();
                     },
                   ),
                 ],
@@ -180,9 +276,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         return ElevatedButton(
                           child: Text('Refresh'),
                           onPressed: () {
-                            setState(() {
-                              _queryAll();
-                            });
+                            // setState(() {
+                            //   _queryAll();
+                            // });
+                            _refresh();
                           },
                         );
                       }
@@ -195,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         trailing: Text(medicines[index].storage.toString()),
                         onTap: () {
                           print('push another window calling');
-                          _editWindow();
+                          _editWindow(medicines[index]);
                         },
                       );
                     },
@@ -344,6 +441,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void _refresh() {
+    setState(() {
+      _queryAll();
+    });
   }
 
   void _insert(name, location, price, storage) async {
