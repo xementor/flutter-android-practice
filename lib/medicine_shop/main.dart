@@ -101,111 +101,111 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget Update(Medicine med) => Scaffold(
-      appBar: AppBar(
-        title: Text('Manage'),
-      ),
-      body: Column(
-        children: <Widget>[
-          // _storage(med),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              controller: storageUpdateController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Storage',
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    storage++;
-                  });
-                },
-                child: Text('Add'),
-              ),
-              Text(storage.toString()),
-              TextButton(
-                onPressed: () {},
-                child: Text('Sell'),
-              ),
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              controller: idUpdateController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                label: const Text('Medicine id'),
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              controller: nameUpdateController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Medicine Name',
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              controller: locationUpdateController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'location',
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: TextField(
-              controller: priceUpdateController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'price',
-              ),
-            ),
-          ),
-          // RaisedButton(
-          //   child: Text('Update Medicine Details'),
-          //   onPressed: () {
-          //     int id = int.parse(idUpdateController.text);
-          //     String name = nameUpdateController.text;
-          //     String location = locationUpdateController.text;
-          //     double price = double.parse(priceUpdateController.text);
-          //     int storage = int.parse(storageUpdateController.text);
-          //     _update(id, name, location, price, storage);
-          //   },
-          // ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Text('Update'),
-        onPressed: () {
-          // updating from db
-          int id = int.parse(idUpdateController.text);
-          String name = nameUpdateController.text;
-          String location = locationUpdateController.text;
-          double price = double.parse(priceUpdateController.text);
-          int storage = int.parse(storageUpdateController.text);
-          _update(id, name, location, price, storage);
+  // Widget Update(Medicine med) => Scaffold(
+  //     appBar: AppBar(
+  //       title: Text('Manage'),
+  //     ),
+  //     body: Column(
+  //       children: <Widget>[
+  //         // _storage(med),
+  //         Container(
+  //           padding: EdgeInsets.all(10),
+  //           child: TextField(
+  //             controller: storageUpdateController,
+  //             decoration: InputDecoration(
+  //               border: OutlineInputBorder(),
+  //               labelText: 'Storage',
+  //             ),
+  //           ),
+  //         ),
+  //         Row(
+  //           children: [
+  //             TextButton(
+  //               onPressed: () {
+  //                 setState(() {
+  //                   storage++;
+  //                 });
+  //               },
+  //               child: Text('Add'),
+  //             ),
+  //             Text(storage.toString()),
+  //             TextButton(
+  //               onPressed: () {},
+  //               child: Text('Sell'),
+  //             ),
+  //           ],
+  //         ),
+  //         Container(
+  //           padding: EdgeInsets.all(10),
+  //           child: TextField(
+  //             controller: idUpdateController,
+  //             decoration: InputDecoration(
+  //               border: OutlineInputBorder(),
+  //               label: const Text('Medicine id'),
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //           padding: EdgeInsets.all(10),
+  //           child: TextField(
+  //             controller: nameUpdateController,
+  //             decoration: InputDecoration(
+  //               border: OutlineInputBorder(),
+  //               labelText: 'Medicine Name',
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //           padding: EdgeInsets.all(10),
+  //           child: TextField(
+  //             controller: locationUpdateController,
+  //             decoration: InputDecoration(
+  //               border: OutlineInputBorder(),
+  //               labelText: 'location',
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //           padding: EdgeInsets.all(10),
+  //           child: TextField(
+  //             controller: priceUpdateController,
+  //             decoration: InputDecoration(
+  //               border: OutlineInputBorder(),
+  //               labelText: 'price',
+  //             ),
+  //           ),
+  //         ),
+  //         // RaisedButton(
+  //         //   child: Text('Update Medicine Details'),
+  //         //   onPressed: () {
+  //         //     int id = int.parse(idUpdateController.text);
+  //         //     String name = nameUpdateController.text;
+  //         //     String location = locationUpdateController.text;
+  //         //     double price = double.parse(priceUpdateController.text);
+  //         //     int storage = int.parse(storageUpdateController.text);
+  //         //     _update(id, name, location, price, storage);
+  //         //   },
+  //         // ),
+  //       ],
+  //     ),
+  //     floatingActionButton: FloatingActionButton(
+  //       child: const Text('Update'),
+  //       onPressed: () {
+  //         // updating from db
+  //         int id = int.parse(idUpdateController.text);
+  //         String name = nameUpdateController.text;
+  //         String location = locationUpdateController.text;
+  //         double price = double.parse(priceUpdateController.text);
+  //         int storage = int.parse(storageUpdateController.text);
+  //         _update(id, name, location, price, storage);
 
-          // going back
-          Navigator.of(context).pop();
+  //         // going back
+  //         Navigator.of(context).pop();
 
-          // set state
-          _refresh();
-        },
-      ));
+  //         // set state
+  //         _refresh();
+  //       },
+  //     ));
 
   // storae state
   int storage = 0;
@@ -214,15 +214,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // widget manual
     _editWindow(Medicine med) {
-      idUpdateController.text = med.id.toString();
-      nameUpdateController.text = med.name;
-      locationUpdateController.text = med.location;
-      priceUpdateController.text = med.price.toString();
-      storageUpdateController.text = med.storage.toString();
+      Map<TextEditingController, String> controller = {
+        idUpdateController: med.id.toString(),
+        nameUpdateController: med.name,
+        locationUpdateController: med.location,
+        priceUpdateController: med.price.toString(),
+        storageUpdateController: med.storage.toString(),
+      };
       //int storage = med.storage;
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
-        return Update(med);
+        return Update(med, controller);
       }));
     }
 
@@ -504,6 +506,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       _delete(id);
                     },
                   ),
+                  Text(storage.toString()),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        storage++;
+                      });
+                    },
+                    child: Text('+'),
+                  ),
                 ],
               ),
             ),
@@ -569,5 +580,137 @@ class _MyHomePageState extends State<MyHomePage> {
     // Assuming that the number of rows is the id for the last row.
     final rowsDeleted = await dbHelper.delete(id);
     _showMessageInScaffold('deleted $rowsDeleted row(s): row $id');
+  }
+}
+
+class Update extends StatefulWidget {
+  late Map<TextEditingController, String> con;
+  late Medicine med;
+
+  Update(Medicine med, Map<TextEditingController, String> con, {Key? key})
+      : super(key: key) {
+    this.med = med;
+    this.con = con;
+  }
+
+  @override
+  _UpdateState createState() => _UpdateState();
+}
+
+class _UpdateState extends State<Update> {
+  int storage = 0;
+  TextEditingController idUpdateController = TextEditingController();
+  TextEditingController nameUpdateController = TextEditingController();
+  TextEditingController locationUpdateController = TextEditingController();
+  TextEditingController priceUpdateController = TextEditingController();
+  TextEditingController storageUpdateController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Manage'),
+        ),
+        body: Column(
+          children: <Widget>[
+            // _storage(med),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                controller: storageUpdateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Storage',
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      storage++;
+                    });
+                  },
+                  child: Text('Add'),
+                ),
+                Text(storage.toString()),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Sell'),
+                ),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                controller: storageUpdateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: const Text('Medicine id'),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                controller: nameUpdateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Medicine Name',
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                controller: locationUpdateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'location',
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                controller: priceUpdateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'price',
+                ),
+              ),
+            ),
+            // RaisedButton(
+            //   child: Text('Update Medicine Details'),
+            //   onPressed: () {
+            //     int id = int.parse(idUpdateController.text);
+            //     String name = nameUpdateController.text;
+            //     String location = locationUpdateController.text;
+            //     double price = double.parse(priceUpdateController.text);
+            //     int storage = int.parse(storageUpdateController.text);
+            //     _update(id, name, location, price, storage);
+            //   },
+            // ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Text('Update'),
+          onPressed: () {
+            // updating from db
+            int id = int.parse(idUpdateController.text);
+            String name = nameUpdateController.text;
+            String location = locationUpdateController.text;
+            double price = double.parse(priceUpdateController.text);
+            int storage = int.parse(storageUpdateController.text);
+            // _update(id, name, location, price, storage);
+
+            // going back
+            Navigator.of(context).pop();
+
+            // set state
+            // _refresh();
+          },
+        ));
   }
 }
