@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:practice/medicine_shop/controller/controller.dart';
+import 'package:provider/src/provider.dart';
 
 import '../controller/medicine.dart';
 
@@ -12,10 +14,9 @@ class Tab2 extends StatelessWidget {
   TextEditingController priceUpdateController = TextEditingController();
   TextEditingController storageUpdateController = TextEditingController();
   TextEditingController queryController = TextEditingController();
-  List<Medicine> medicines = [];
-
   @override
   Widget build(BuildContext context) {
+    List<Medicine> medicines = context.watch<Controller>().medicines;
     return Column(
       children: [
         Expanded(
@@ -27,6 +28,7 @@ class Tab2 extends StatelessWidget {
                 return ElevatedButton(
                   child: const Text('Refresh'),
                   onPressed: () {
+                    context.watch<Controller>().queryAll();
                     // setState(() {
                     //   _queryAll();
                     // });

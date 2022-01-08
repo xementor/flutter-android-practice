@@ -24,8 +24,7 @@ class Tab1 extends StatelessWidget {
               controller: nameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                // labelText: 'Medicine Name',
-                labelText: '${context.watch<Counter>().count}',
+                labelText: 'Medicine Name',
               ),
             ),
           ),
@@ -70,6 +69,7 @@ class Tab1 extends StatelessWidget {
               // Controller._insert(name, location, price, storage);
 
               nameController.clear;
+              context.read<Controller>().insert(name, location, price, storage);
 
               // refresh
               // _refresh();

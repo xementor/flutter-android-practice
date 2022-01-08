@@ -1,14 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'medicine.dart';
 import 'dbhelper.dart';
 
-class Controller {
+class Controller with ChangeNotifier, DiagnosticableTreeMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Medicine> medicines = [];
 
   final dbHelper = DatabaseHelper.instance;
 
-  void _insert(name, location, price, storage) async {
+  void insert(name, location, price, storage) async {
     int idx = 33;
     // row to insert
     Medicine car = Medicine(
@@ -20,13 +21,19 @@ class Controller {
     );
     final id = await dbHelper.insert(car);
     _showMessageInScaffold('inserted row id: $id');
+
+    // provider
+    notifyListeners();
   }
 
-  void _queryAll() async {
+  void queryAll() async {
     final allRows = await dbHelper.queryAllRows();
     medicines.clear();
     allRows.forEach((row) => medicines.add(Medicine.fromMap(row)));
     _showMessageInScaffold('Query done.');
+
+    // provider
+    notifyListeners();
   }
 
   void _query(name) async {
@@ -52,6 +59,7 @@ class Controller {
   }
 
   void _showMessageInScaffold(String message) {
+    // ignore: deprecated_member_use
     _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text(message),
     ));
