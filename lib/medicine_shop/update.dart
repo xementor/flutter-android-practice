@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dbhelper.dart';
+import 'controller/dbhelper.dart';
 
-import 'medicine.dart';
+import 'controller/medicine.dart';
 
 void main() => runApp(MyApp());
 
