@@ -16,7 +16,7 @@ class Tab1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
+      child: ListView(
         children: <Widget>[
           Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 5),

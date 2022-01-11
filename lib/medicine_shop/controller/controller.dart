@@ -8,6 +8,7 @@ class Controller with ChangeNotifier, DiagnosticableTreeMixin {
   List<Medicine> medicines = [];
 
   final dbHelper = DatabaseHelper.instance;
+  final int demo = 11;
 
   void insert(name, location, price, storage) async {
     int idx = 33;
@@ -20,7 +21,7 @@ class Controller with ChangeNotifier, DiagnosticableTreeMixin {
       storage: storage,
     );
     final id = await dbHelper.insert(car);
-    _showMessageInScaffold('inserted row id: $id');
+    // _showMessageInScaffold('inserted row id: $id');
 
     // provider
     notifyListeners();
@@ -30,26 +31,27 @@ class Controller with ChangeNotifier, DiagnosticableTreeMixin {
     final allRows = await dbHelper.queryAllRows();
     medicines.clear();
     allRows.forEach((row) => medicines.add(Medicine.fromMap(row)));
-    _showMessageInScaffold('Query done.');
+    // _showMessageInScaffold('Query done.');
 
     // provider
     notifyListeners();
   }
 
-  void _query(name) async {
+  void query(name) async {
     final allRows = await dbHelper.queryRows(name);
     // medicineByName.clear();
     // allRows.forEach((row) => medicineByName.add(Medicine.fromMap(row)));
     medicines.clear();
     allRows.forEach((row) => medicines.add(Medicine.fromMap(row)));
+    notifyListeners();
   }
 
-  void _update(id, name, location, price, storage) async {
+  void update(id, name, location, price, storage) async {
     // row to update
     Medicine med = Medicine(
         id: id, name: name, location: location, price: price, storage: storage);
     final rowsAffected = await dbHelper.update(med);
-    _showMessageInScaffold('updated $rowsAffected row(s)');
+    // _showMessageInScaffold('updated $rowsAffected row(s)');
   }
 
   void _delete(id) async {

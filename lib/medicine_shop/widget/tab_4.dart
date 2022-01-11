@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:practice/medicine_shop/controller/controller.dart';
+import 'package:practice/medicine_shop/controller/medicine.dart';
+import 'package:provider/src/provider.dart';
 
-class Tab4 extends StatefulWidget {
-  Tab4({Key? key}) : super(key: key);
+class Tab4 extends StatelessWidget {
+  Tab4(this.medicine, {Key? key}) : super(key: key);
 
-  @override
-  _Tab4State createState() => _Tab4State();
-}
+  Medicine medicine;
+  TextEditingController idUpdateController = TextEditingController();
+  TextEditingController nameUpdateController = TextEditingController();
+  TextEditingController locationUpdateController = TextEditingController();
+  TextEditingController priceUpdateController = TextEditingController();
+  TextEditingController storageUpdateController = TextEditingController();
 
-class _Tab4State extends State<Tab4> {
-  @override
   Widget build(BuildContext context) {
+    idUpdateController.text = medicine.id.toString();
+    nameUpdateController.text = medicine.name;
+    locationUpdateController.text = medicine.location;
+    priceUpdateController.text = medicine.price.toString();
+    storageUpdateController.text = medicine.storage.toString();
+
+    // context.read<Controller>().
     return Center(
-      child: Column(
+      child: ListView(
         children: <Widget>[
           Container(
             padding: EdgeInsets.all(20),
@@ -63,7 +74,7 @@ class _Tab4State extends State<Tab4> {
               ),
             ),
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text('Update Medicine Details'),
             onPressed: () {
               int id = int.parse(idUpdateController.text);
@@ -71,7 +82,10 @@ class _Tab4State extends State<Tab4> {
               String location = locationUpdateController.text;
               double price = double.parse(priceUpdateController.text);
               int storage = int.parse(storageUpdateController.text);
-              _update(id, name, location, price, storage);
+              // update(id, name, location, price, storage);
+              context
+                  .read<Controller>()
+                  .update(id, name, location, price, storage);
             },
           ),
         ],

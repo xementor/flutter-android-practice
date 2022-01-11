@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:practice/medicine_shop/controller/medicine.dart';
 
 Widget _storage(Medicine med) {
   int storage = med.storage;
+  TextEditingController storageUpdateController = TextEditingController();
   return Column(
     children: [
       Container(
@@ -28,11 +30,7 @@ Widget _storage(Medicine med) {
           ),
           Text(storage.toString()),
           TextButton(
-            onPressed: () {
-              setState(() {
-                storage++;
-              });
-            },
+            onPressed: () {},
             child: Text('Add'),
           ),
           TextButton(
