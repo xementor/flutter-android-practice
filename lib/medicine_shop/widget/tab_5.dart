@@ -25,15 +25,13 @@ class Tab5 extends StatelessWidget {
             child: Text('Delete'),
             onPressed: () {
               int id = int.parse(idDeleteController.text);
-              _delete(id);
+              // delete(id);
             },
           ),
-          Text(storage.toString()),
+          Text("storage.toString()"),
           TextButton(
             onPressed: () {
-              setState(() {
-                storage++;
-              });
+              // storage++;
             },
             child: Text('+'),
           ),

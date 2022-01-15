@@ -13,7 +13,7 @@ class Tab2 extends StatelessWidget {
   TextEditingController queryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    List<Medicine> medicines = context.watch<Controller>().medicines;
+    List<Medicine> medicines = context.read<Controller>().medicines;
     return Column(
       children: [
         Expanded(

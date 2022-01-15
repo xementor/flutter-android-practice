@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice/medicine_shop/controller/medicine.dart';
 
 class Tab3 extends StatefulWidget {
   Tab3({Key? key}) : super(key: key);
@@ -39,14 +40,14 @@ class _Tab3State extends State<Tab3> {
             height: 300,
             child: ListView.builder(
               padding: const EdgeInsets.all(8),
-              itemCount: medicines.length,
+              itemCount: 3, //medicines.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: 50,
                   margin: EdgeInsets.all(2),
                   child: ListTile(
                     title: Text(
-                      /*[${medicineByName[index].id}]*/ ' ${medicine[index].name} ',
+                      /*[${medicineByName[index].id}]*/ '{medicines[index].name} ',
                       style: TextStyle(fontSize: 18),
                     ),
                   ),

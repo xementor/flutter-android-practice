@@ -52,6 +52,7 @@ class Controller with ChangeNotifier, DiagnosticableTreeMixin {
         id: id, name: name, location: location, price: price, storage: storage);
     final rowsAffected = await dbHelper.update(med);
     // _showMessageInScaffold('updated $rowsAffected row(s)');
+    notifyListeners();
   }
 
   void _delete(id) async {
