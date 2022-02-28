@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:practice/medicine_shop/controller/controller.dart';
+import 'package:practice/medicine_shop/controller/medicine_controller.dart';
 import 'package:practice/medicine_shop/widget/tab_4.dart';
 import 'package:provider/src/provider.dart';
 
@@ -13,7 +13,7 @@ class Tab2 extends StatelessWidget {
   TextEditingController queryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    List<Medicine> medicines = context.read<Controller>().medicines;
+    List<Medicine> medicines = context.read<MedicineController>().medicines;
     return Column(
       children: [
         Expanded(
@@ -25,7 +25,7 @@ class Tab2 extends StatelessWidget {
                 return ElevatedButton(
                   child: const Text('Refresh'),
                   onPressed: () {
-                    context.read<Controller>().queryAll();
+                    context.read<MedicineController>().queryAll();
                     // _refresh();
                   },
                 );
@@ -41,14 +41,49 @@ class Tab2 extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
+                        Map<String, dynamic> data = {
+                          'id': index,
+                          'name': medicines[index].name,
+                          'location': medicines[index].location,
+                          'price': medicines[index].price,
+                          'storage': medicines[index].storage,
+                        };
                         return Scaffold(
                           appBar: AppBar(
                             title: const Text('Editing window'),
                           ),
-                          body: Tab4(medicines[index]),
+                          body: Tab4(medicines[index], data: data),
                           floatingActionButton: FloatingActionButton(
                             child: Icon(Icons.update),
-                            onPressed: () {},
+                            onPressed: () {
+                              // loss project
+                              data['update'] = true;
+                              data.forEach((key, value) {
+                                print("$key and $value");
+                              });
+
+                              int dataId = data['id'];
+                              String dataname = data['name'];
+                              print(dataname);
+                              String dataLocation = data['location'];
+                              double dataPrice = data['price'];
+                              int dataStorage = data['storage'];
+
+                              context.read<MedicineController>().update(
+                                  // dataId,
+                                  // dataname,
+                                  // dataLocation,
+                                  // dataPrice,
+                                  // dataStorage,
+                                  2,
+                                  'xxx',
+                                  'xnx',
+                                  1.1,
+                                  1);
+                              context.read<MedicineController>().queryAll();
+                              print(medicines[2].name);
+                              Navigator.pop(context);
+                            },
                           ),
                         );
                       },
@@ -68,7 +103,7 @@ class Tab2 extends StatelessWidget {
           ),
           onChanged: (text) {
             if (text.length >= 1) {
-              context.read<Controller>().query(text);
+              context.read<MedicineController>().query(text);
             } else {
               // _refresh();
               medicines.clear();
@@ -77,9 +112,9 @@ class Tab2 extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            context.read<Controller>().queryAll();
+            context.read<MedicineController>().queryAll();
           },
-          child: Text('${context.read<Controller>().demo}'),
+          child: Text('${context.read<MedicineController>().demo}'),
         ),
       ],
     );

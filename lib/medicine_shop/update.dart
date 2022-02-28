@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'controller/dbhelper.dart';
+import 'controller/med_dbhelper.dart';
 
 import 'controller/medicine.dart';
 
@@ -26,7 +26,7 @@ class Update extends StatefulWidget {
 }
 
 class _UpdateState extends State<Update> {
-  final dbHelper = DatabaseHelper.instance;
+  final dbHelper = MedDatabaseHelper.instance;
   List<Medicine> medicines = [];
   //controllers used in update operation UI
   TextEditingController idUpdateController = TextEditingController();

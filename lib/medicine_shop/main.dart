@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'controller/controller.dart';
+import 'controller/medicine_controller.dart';
 import 'controller/medicine.dart';
-import 'controller/dbhelper.dart';
+import 'controller/med_dbhelper.dart';
 import 'widget/tab_1.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +12,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => Controller()),
+        ChangeNotifierProvider(create: (_) => MedicineController()),
       ],
       child: MyApp(),
     ),

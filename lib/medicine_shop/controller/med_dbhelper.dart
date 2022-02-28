@@ -4,7 +4,7 @@ import 'medicine.dart';
 import 'package:path/path.dart';
 import 'dart:async';
 
-class DatabaseHelper {
+class MedDatabaseHelper {
   static const _databaseName = "medicine.db";
 
   static const table = 'medicine_table';
@@ -16,8 +16,9 @@ class DatabaseHelper {
   static const columnStorage = 'storage';
 
   // make this a singleton class
-  DatabaseHelper._privateConstructor();
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+  MedDatabaseHelper._privateConstructor();
+  static final MedDatabaseHelper instance =
+      MedDatabaseHelper._privateConstructor();
 
   // only have a single app-wide reference to the database
   Future<Database> _initDatabase() async {

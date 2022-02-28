@@ -1,26 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'medicine.dart';
-import 'dbhelper.dart';
+import 'med_dbhelper.dart';
 
-class Controller with ChangeNotifier, DiagnosticableTreeMixin {
+class MedicineController with ChangeNotifier, DiagnosticableTreeMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Medicine> medicines = [];
 
-  final dbHelper = DatabaseHelper.instance;
+  final dbHelper = MedDatabaseHelper.instance;
   final int demo = 11;
 
   void insert(name, location, price, storage) async {
     int idx = 33;
     // row to insert
-    Medicine car = Medicine(
+    Medicine med = Medicine(
       id: idx,
       name: name,
       location: location,
       price: price,
       storage: storage,
     );
-    final id = await dbHelper.insert(car);
+    final id = await dbHelper.insert(med);
     // _showMessageInScaffold('inserted row id: $id');
 
     // provider

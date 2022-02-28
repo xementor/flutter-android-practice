@@ -1,33 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:practice/medicine_shop/controller/controller.dart';
+import 'package:practice/medicine_shop/controller/medicine_controller.dart';
 import 'package:practice/medicine_shop/controller/medicine.dart';
 import 'package:provider/src/provider.dart';
 
-class Tab4 extends StatelessWidget {
-  Tab4(this.medicine, {Key? key}) : super(key: key);
+class Tab4 extends StatefulWidget {
+  Tab4(this.medicine, {Key? key, this.data = const {'id': '1'}})
+      : super(key: key);
 
   Medicine medicine;
-  TextEditingController idUpdateController = TextEditingController();
-  TextEditingController nameUpdateController = TextEditingController();
-  TextEditingController locationUpdateController = TextEditingController();
-  TextEditingController priceUpdateController = TextEditingController();
-  TextEditingController storageUpdateController = TextEditingController();
+  Map<String, dynamic> data;
+
+  @override
+  State<Tab4> createState() => _Tab4State();
+}
+
+class _Tab4State extends State<Tab4> {
+  int storage = 0;
+  // state for storage ++ --
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      storage = widget.medicine.storage;
+    });
+  }
 
   Widget build(BuildContext context) {
-    idUpdateController.text = medicine.id.toString();
-    nameUpdateController.text = medicine.name;
-    locationUpdateController.text = medicine.location;
-    priceUpdateController.text = medicine.price.toString();
-    storageUpdateController.text = medicine.storage.toString();
+    TextEditingController idUpdateController = TextEditingController();
+
+    TextEditingController nameUpdateController = TextEditingController();
+
+    TextEditingController locationUpdateController = TextEditingController();
+
+    TextEditingController priceUpdateController = TextEditingController();
+
+    TextEditingController storageUpdateController = TextEditingController();
+
+    idUpdateController.text = widget.medicine.id.toString();
+    nameUpdateController.text = widget.medicine.name;
+    locationUpdateController.text = widget.medicine.location;
+    priceUpdateController.text = widget.medicine.price.toString();
+    storageUpdateController.text = storage.toString();
 
     // context.read<Controller>().
     return Center(
       child: ListView(
         children: <Widget>[
           Container(
+            child: TextButton(
+              child: Text(storage.toString()),
+              onPressed: () {
+                print('clicked');
+                setState(() {
+                  storage++;
+                });
+              },
+            ),
+          ),
+          Container(
             padding: EdgeInsets.all(20),
             child: TextField(
               controller: idUpdateController,
+              onChanged: (value) {
+                widget.data['id'] = int.parse(value);
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Medicine id',
@@ -38,6 +75,9 @@ class Tab4 extends StatelessWidget {
             padding: EdgeInsets.all(20),
             child: TextField(
               controller: nameUpdateController,
+              onChanged: (value) {
+                widget.data['name'] = value;
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Medicine Name',
@@ -48,6 +88,9 @@ class Tab4 extends StatelessWidget {
             padding: EdgeInsets.all(20),
             child: TextField(
               controller: locationUpdateController,
+              onChanged: (value) {
+                widget.data['location'] = value;
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'location',
@@ -58,6 +101,9 @@ class Tab4 extends StatelessWidget {
             padding: EdgeInsets.all(20),
             child: TextField(
               controller: priceUpdateController,
+              onChanged: (value) {
+                widget.data['price'] = double.parse(value);
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'price',
@@ -68,6 +114,9 @@ class Tab4 extends StatelessWidget {
             padding: EdgeInsets.all(20),
             child: TextField(
               controller: storageUpdateController,
+              onChanged: (value) {
+                widget.data['storage'] = int.parse(value);
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Storage',
@@ -84,8 +133,10 @@ class Tab4 extends StatelessWidget {
               int storage = int.parse(storageUpdateController.text);
               // update(id, name, location, price, storage);
               context
-                  .read<Controller>()
+                  .read<MedicineController>()
                   .update(id, name, location, price, storage);
+              context.read<MedicineController>().queryAll();
+              Navigator.pop(context);
             },
           ),
         ],

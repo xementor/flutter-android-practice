@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import '../controller/controller.dart';
+import '../controller/medicine_controller.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 
@@ -69,7 +69,9 @@ class Tab1 extends StatelessWidget {
               // Controller._insert(name, location, price, storage);
 
               nameController.clear;
-              context.read<Controller>().insert(name, location, price, storage);
+              context
+                  .read<MedicineController>()
+                  .insert(name, location, price, storage);
 
               // refresh
               // _refresh();
