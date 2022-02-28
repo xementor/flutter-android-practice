@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice/medicine_shop/controller/account_controller.dart';
 import 'package:practice/medicine_shop/controller/medicine_controller.dart';
 import 'package:practice/medicine_shop/controller/medicine.dart';
 import 'package:provider/src/provider.dart';
@@ -16,13 +17,14 @@ class Tab4 extends StatefulWidget {
 
 class _Tab4State extends State<Tab4> {
   int storage = 0;
+  late int count;
   // state for storage ++ --
   @override
   void initState() {
     super.initState();
-
     setState(() {
       storage = widget.medicine.storage;
+      count = 0;
     });
   }
 
@@ -54,6 +56,7 @@ class _Tab4State extends State<Tab4> {
                 print('clicked');
                 setState(() {
                   storage++;
+                  count++;
                 });
               },
             ),
@@ -135,7 +138,17 @@ class _Tab4State extends State<Tab4> {
               context
                   .read<MedicineController>()
                   .update(id, name, location, price, storage);
+              context
+                  .read<AccountController>()
+                  .insert(name, DateTime.now(), price, count);
               context.read<MedicineController>().queryAll();
+
+              //Debug
+              context.read<AccountController>().queryAll();
+              context.read<AccountController>().accounts.forEach((element) {
+                print(element.toString());
+              });
+              print('iam goind');
               Navigator.pop(context);
             },
           ),

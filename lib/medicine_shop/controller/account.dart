@@ -1,7 +1,7 @@
 class Account {
   int? id;
   final String name;
-  final DateTime date;
+  final String date;
   final double price;
   final int quantity;
   final double amount;
@@ -35,6 +35,6 @@ class Account {
 
   @override
   String toString() {
-    return 'Medicine{id: , name: $name, date: $date, price: $price, quantity: $quantity, amouont: $amount';
+    return 'Account{id: , name: $name, date: $date, price: $price, quantity: $quantity, amouont: $amount';
   }
 }

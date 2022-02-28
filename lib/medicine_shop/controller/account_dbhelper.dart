@@ -33,7 +33,7 @@ class AccDatabaseHelper {
             $columnName TEXT NOT NULL,
             $columnDate TEXT NOT NULL,
             $columnPrice REAL  NOT NULL,
-            $columnCount INT NOT NULL
+            $columnCount INT NOT NULL,
             $columnAmount REAL NOT NULL
             )
           ''');

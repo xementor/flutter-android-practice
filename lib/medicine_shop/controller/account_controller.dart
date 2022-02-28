@@ -14,11 +14,12 @@ class AccountController with ChangeNotifier, DiagnosticableTreeMixin {
 
   void insert(String name, DateTime date, double price, int quantity) async {
     int idx = 33;
+    String sdate = date.toString();
     // row to insert
     Account acc = Account(
       id: idx,
       name: name,
-      date: date,
+      date: sdate,
       price: price,
       quantity: quantity,
       amount: price * quantity,
@@ -52,10 +53,11 @@ class AccountController with ChangeNotifier, DiagnosticableTreeMixin {
   void update(
       int id, String name, DateTime date, double price, int quantity) async {
     // row to update
+    String sdate = date.toString();
     Account acc = Account(
       id: id,
       name: name,
-      date: date,
+      date: sdate,
       price: price,
       quantity: quantity,
       amount: price * quantity,

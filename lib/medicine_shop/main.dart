@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practice/medicine_shop/widget/account_tab.dart';
+import 'controller/account_controller.dart';
 import 'controller/medicine_controller.dart';
 import 'controller/medicine.dart';
 import 'controller/med_dbhelper.dart';
@@ -13,6 +15,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MedicineController()),
+        ChangeNotifierProvider(create: (_) => AccountController()),
       ],
       child: MyApp(),
     ),
@@ -68,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
@@ -79,6 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Tab(
                 text: "View",
+              ),
+              Tab(
+                text: "Account",
               ),
               Tab(
                 text: "Query",
@@ -97,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Tab1(),
             Tab2(),
+            AccountTab(),
             Text('hi'),
             Text('hi'),
             Text('hi'),
