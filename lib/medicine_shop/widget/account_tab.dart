@@ -9,17 +9,61 @@ class AccountTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Account> accounts = context.read<AccountController>().accounts;
-    return Container(
-      child: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        return Table(
-          children: [
-            TableRow(children: [
-              Text(accounts[index].name),
-              Text(accounts[index].date),
-            ]),
-          ],
-        );
-      }),
+
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.all(15),
+          padding: EdgeInsets.all(5),
+          color: Colors.blue,
+          child: Text(
+            "Your Total Selling",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: accounts.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (index > accounts.length) {
+                return IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.ac_unit));
+                print("nothign here");
+                // context.read<AccountController>().queryDate();
+              }
+              return Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Table(
+                      border: const TableBorder(
+                        horizontalInside: BorderSide(
+                          width: 2,
+                          color: Colors.blue,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                      children: [
+                        TableRow(
+                          children: [
+                            Text(accounts[index].id.toString()),
+                            Text(accounts[index].name),
+                            Text(accounts[index].quantity.toString()),
+                            Text(accounts[index].price.toString())
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

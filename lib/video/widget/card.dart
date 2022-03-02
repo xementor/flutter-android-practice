@@ -7,7 +7,6 @@ Widget card() {
     child: Column(
       children: [
         video(),
-        textContainer("abc"),
       ],
     ),
   );

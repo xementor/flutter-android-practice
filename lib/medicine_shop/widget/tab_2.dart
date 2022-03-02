@@ -8,20 +8,49 @@ import '../controller/medicine.dart';
 
 class Tab2 extends StatelessWidget {
   Tab2({Key? key}) : super(key: key);
+  late List<Medicine> medicines;
 
   //controllers used in update operation UI
   TextEditingController queryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     List<Medicine> medicines = context.read<MedicineController>().medicines;
+    context.read<MedicineController>().queryAll();
     return Column(
       children: [
+        Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(5),
+              color: Colors.blue,
+              child: const Text(
+                "Available Medicine",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                context.read<MedicineController>().queryAll();
+              },
+              icon: Icon(Icons.refresh),
+            ),
+          ],
+        ),
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: medicines.length + 1,
+            itemCount: medicines.length,
             itemBuilder: (BuildContext context, int index) {
-              if (index == medicines.length) {
+              print("index $index\n ${medicines.length}");
+
+              if (index > medicines.length) {
+                print("hi");
+              }
+              if (index > medicines.length) {
                 return ElevatedButton(
                   child: const Text('Refresh'),
                   onPressed: () {
@@ -109,12 +138,6 @@ class Tab2 extends StatelessWidget {
               medicines.clear();
             }
           },
-        ),
-        TextButton(
-          onPressed: () {
-            context.read<MedicineController>().queryAll();
-          },
-          child: Text('${context.read<MedicineController>().demo}'),
         ),
       ],
     );

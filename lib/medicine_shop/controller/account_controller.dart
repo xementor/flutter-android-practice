@@ -35,18 +35,24 @@ class AccountController with ChangeNotifier, DiagnosticableTreeMixin {
     final allRows = await dbHelper.queryAllRows();
     accounts.clear();
     allRows.forEach((row) => accounts.add(Account.fromMap(row)));
-    // _showMessageInScaffold('Query done.');
-
-    // provider
     notifyListeners();
   }
 
-  void query(name) async {
+  void query(String name) async {
     final allRows = await dbHelper.queryRows(name);
-    // medicineByName.clear();
-    // allRows.forEach((row) => medicineByName.add(Medicine.fromMap(row)));
     accounts.clear();
     allRows.forEach((row) => accounts.add(Account.fromMap(row)));
+    notifyListeners();
+  }
+
+  void queryDate() async {
+    final allRows = await dbHelper.querybyToday();
+
+    accounts.clear();
+    allRows.forEach((row) {
+      accounts.add(Account.fromMap(row));
+      print(row.entries);
+    });
     notifyListeners();
   }
 

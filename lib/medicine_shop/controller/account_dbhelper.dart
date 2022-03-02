@@ -92,6 +92,20 @@ class AccDatabaseHelper {
     return await db.query(table, where: "$columnName LIKE '%$name%'");
   }
 
+  Future<List<Map<String, dynamic>>> querybyToday() async {
+    // var sdate = date.compareTo(DateTime.april);
+    Database db = await instance.database;
+
+    // return await db.query(
+    //   table,
+    //   where: "date > ?",
+    //   whereArgs: [DateTime(2022, 2, 28).toString()],
+    // );
+    return await db.rawQuery(
+        "SELECT * FROM   $table WHERE  date BETWEEN JulianDay('now') AND JulianDay('now','+1 day','-0.001 second')");
+    // "select * from $table");
+  }
+
   // All of the methods (insert, query, update, delete) can also be done using
   // raw SQL commands. This method uses a raw query to give the row count.
   Future<int?> queryRowCount() async {

@@ -146,6 +146,7 @@ class _Tab4State extends State<Tab4> {
               //Debug
               context.read<AccountController>().queryAll();
               context.read<AccountController>().accounts.forEach((element) {
+                print("q");
                 print(element.toString());
               });
               print('iam goind');
