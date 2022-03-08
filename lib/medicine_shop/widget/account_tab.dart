@@ -31,6 +31,7 @@ class AccountTab extends StatelessWidget {
               if (index > accounts.length) {
                 return IconButton(
                     onPressed: () {}, icon: const Icon(Icons.ac_unit));
+                // ignore: avoid_print
                 print("nothign here");
                 // context.read<AccountController>().queryDate();
               }

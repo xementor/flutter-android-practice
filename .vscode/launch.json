@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/tab_bar.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/tab_bar.dart"
+        },
+        {
+            "name": "Flutter (lib/traversy_app.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/traversy_app.dart"
+        }
+    ]
+}
