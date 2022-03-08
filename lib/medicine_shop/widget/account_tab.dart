@@ -53,7 +53,8 @@ class AccountTab extends StatelessWidget {
                             Text(accounts[index].id.toString()),
                             Text(accounts[index].name),
                             Text(accounts[index].quantity.toString()),
-                            Text(accounts[index].price.toString())
+                            Text(accounts[index].price.toString()),
+                            Text(accounts[index].date),
                           ],
                         ),
                       ],

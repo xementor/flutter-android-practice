@@ -38,8 +38,8 @@ class AccountController with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-  void query(String name) async {
-    final allRows = await dbHelper.queryRows(name);
+  void query(DateTime date) async {
+    final allRows = await dbHelper.queryRows(date);
     accounts.clear();
     allRows.forEach((row) => accounts.add(Account.fromMap(row)));
     notifyListeners();
@@ -57,7 +57,12 @@ class AccountController with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   void update(
-      int id, String name, DateTime date, double price, int quantity) async {
+    int id,
+    String name,
+    DateTime date,
+    double price,
+    int quantity,
+  ) async {
     // row to update
     String sdate = date.toString();
     Account acc = Account(
