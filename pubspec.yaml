@@ -41,6 +41,7 @@ dependencies:
   sqflite: ^2.0.1
   provider: ^6.0.2
   flutter_redux: ^0.8.2
+  flutter_custom_tabs: ^1.0.4
 
 dev_dependencies:
   flutter_test:
